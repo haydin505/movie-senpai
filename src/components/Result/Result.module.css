@@ -4,8 +4,10 @@
   background-color: azure;
   width: 20%;
   max-height: 50%;
+  /* max-height: 100px; */
   display: inline-block;
   margin: 1%;
+  font-size: 60%;
   /* max-block-size: 150px; */
 }
 
