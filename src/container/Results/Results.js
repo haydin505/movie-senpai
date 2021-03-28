@@ -86,10 +86,10 @@ class Results extends Component {
     this.fetchFilms();
   }
   fetchFilms = () => {
-    console.log(API_KEY);
-    console.log(window.location.href);
+    // console.log(API_KEY);
+    // console.log(window.location.href);
     const url = new URL(window.location.href);
-    console.log(url.pathname.slice(1));
+    // console.log(url.pathname.slice(1));
     let searchQuery = url.pathname.slice(1).split("&");
     let finalUrl = "";
 
@@ -114,10 +114,11 @@ class Results extends Component {
         searchQuery[0] +
         "&include_adult=false";
     }
+    // console.log(searchQuery.join(""));
+    // console.log(finalUrl);
 
-    console.log(finalUrl);
+    if (searchQuery.join("") === "") return;
 
-    if (finalUrl === "") return;
     fetch(finalUrl)
       .then((result) => {
         console.log(result);
@@ -134,7 +135,7 @@ class Results extends Component {
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     // console.log(Object.keys(this.state.films));
     let renderFilms = null;
     if (this.state.films != null) {

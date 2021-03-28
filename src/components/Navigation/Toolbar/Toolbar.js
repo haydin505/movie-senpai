@@ -6,7 +6,7 @@ const toolbar = (props) => {
   return (
     <div className={styles.Toolbar}>
       <h1 style={{ marginTop: "0" }}>Movie Senpai</h1>
-      <img className={styles.Logo} src={movieLogo} />
+      <img className={styles.Logo} src={movieLogo} alt="movielogo" />
     </div>
   );
 };

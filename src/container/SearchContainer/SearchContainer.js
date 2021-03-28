@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styles from "./SearchContainer.module.css";
 import { useHistory } from "react-router-dom";
 const SearchContainer = (props) => {
@@ -21,9 +21,9 @@ const SearchContainer = (props) => {
     // console.log(event.target.value);
     year = event.target.value;
   }
-  function clearContent(event) {
-    event.target.value = "";
-  }
+  // function clearContent(event) {
+  //   event.target.value = "";
+  // }
 
   return (
     <div className={styles.SearchBox}>
