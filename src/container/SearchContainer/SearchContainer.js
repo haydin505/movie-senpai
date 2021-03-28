@@ -6,7 +6,8 @@ const SearchContainer = (props) => {
   let year = "*";
   const history = useHistory();
   //   console.log(props);
-  function searchSubmitHandler() {
+  function searchSubmitHandler(event) {
+    event.preventDefault();
     history.push("/" + title + "&" + year);
     document.getElementsByTagName("option").value = "1996";
     document.getElementById("searchBar").value = "";
