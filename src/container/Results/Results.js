@@ -100,7 +100,7 @@ class Results extends Component {
         API_KEY +
         "&query=" +
         searchQuery[0] +
-        "&include_adult=true" +
+        "&include_adult=false" +
         "&year=" +
         searchQuery[1];
     }
@@ -112,7 +112,7 @@ class Results extends Component {
         API_KEY +
         "&query=" +
         searchQuery[0] +
-        "&include_adult=true";
+        "&include_adult=false";
     }
 
     console.log(finalUrl);
