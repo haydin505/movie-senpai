@@ -1,0 +1,19 @@
+.Result {
+  box-sizing: border-box;
+  border: 2px solid rgb(17, 16, 16);
+  background-color: azure;
+  width: 20%;
+  max-height: 50%;
+  display: inline-block;
+  margin: 1%;
+  /* max-block-size: 150px; */
+}
+
+.Result img {
+  margin-top: 1%;
+  padding: 1%;
+  max-width: 92%;
+  min-height: 100%;
+  border: 2px solid rgb(246, 4, 4);
+  /* width: auto; */
+}

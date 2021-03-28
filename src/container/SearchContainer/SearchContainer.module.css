@@ -1,0 +1,11 @@
+.SearchBox {
+  height: 100%;
+  width: 80%;
+  border: 2px solid rgb(38, 44, 53);
+  text-align: center;
+  margin: auto auto;
+  display: flex;
+  column-gap: 20%;
+  /* justify-content: space-between; */
+  /* height: 1%; */
+}
