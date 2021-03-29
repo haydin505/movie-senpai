@@ -1,1 +1,1 @@
-Movie Senpai: http://moviesenpai.netlify.com/
+Movie Senpai: https://moviesenpai.netlify.com/
