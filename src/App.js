@@ -1,4 +1,5 @@
 import "./App.css";
+// import styles from "./App.module.css";
 import Layout from "./hoc/Layout/Layout";
 import SearchContainer from "./container/SearchContainer/SearchContainer";
 import Toolbar from "./components/Navigation/Toolbar/Toolbar";

@@ -74,10 +74,10 @@ class Results extends Component {
     // },
   };
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.state.films);
-    console.log(prevState);
-    console.log(prevProps);
-    if (this.props.location !== prevProps.location) this.fetchFilms();
+    // console.log(this.props.location.pathname);
+    // console.log(prevProps.location.pathname);
+    if (this.props.location.pathname !== prevProps.location.pathname)
+      this.fetchFilms();
 
     // this.fetchFilms();
   }
@@ -117,7 +117,10 @@ class Results extends Component {
     // console.log(searchQuery.join(""));
     // console.log(finalUrl);
 
-    if (searchQuery.join("") === "") return;
+    if (searchQuery.join("") === "") {
+      this.setState({ films: null });
+      return;
+    }
 
     fetch(finalUrl)
       .then((result) => {
@@ -149,17 +152,12 @@ class Results extends Component {
         );
       });
     }
-    if (this.state.films == null)
-      renderFilms = <h2>You can search for the films above</h2>;
+    // if (this.state.films == null)
+    //   renderFilms = <h2>You can search for the films above</h2>;
 
-    if (this.state.films === 0) renderFilms = <h2>Not Found!</h2>;
-    return (
-      <div className={styles.Results}>
-        <h1>Results</h1>
-
-        {renderFilms}
-      </div>
-    );
+    if (this.state.films === 0)
+      renderFilms = <h2>Senpai couldn't find any results.</h2>;
+    return <div className={styles.Results}>{renderFilms}</div>;
   }
 }
 
