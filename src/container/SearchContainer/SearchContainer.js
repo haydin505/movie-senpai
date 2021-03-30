@@ -9,17 +9,23 @@ const SearchContainer = (props) => {
   function searchSubmitHandler(event) {
     event.preventDefault();
     history.push("/" + title + "&" + year);
-    document.getElementsByTagName("option").value = "1996";
+    // document.getElementsByTagName("option").value = "1996";
     document.getElementById("searchBar").value = "";
   }
 
-  function searchValueChangedHandler(event) {
-    // console.log(event.target.value);
+  function searchElasticHandler(event) {
     title = event.target.value;
+    history.push("/" + title + "&" + year);
   }
+
+  // function searchValueChangedHandler(event) {
+  //   // console.log(event.target.value);
+  //   title = event.target.value;
+  // }
   function optionValueChangedHandler(event) {
-    // console.log(event.target.value);
+    console.log(event.target.value);
     year = event.target.value;
+    history.push("/" + title + "&" + year);
   }
   // function clearContent(event) {
   //   event.target.value = "";
@@ -139,7 +145,7 @@ const SearchContainer = (props) => {
           id="searchBar"
           type="text"
           placeholder="search"
-          onChange={searchValueChangedHandler}
+          onChange={searchElasticHandler}
         />
         <input
           className={styles.Input}
