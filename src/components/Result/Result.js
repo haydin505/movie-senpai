@@ -1,41 +1,56 @@
-import React from "react";
+import React, { Component } from "react";
 import styles from "./Result.module.css";
 import Spinner from "../Spinner/Spinner";
 
-const result = (props) => {
-  const dateChangeHandler = () => {
-    console.log(props.release_date);
-    if (props.release_date === "" || props.release_date === undefined) {
-      return "";
-    }
-    let output = props.release_date.slice(0, 4);
-    console.log(output);
-    return output;
-  };
+class Result extends Component {
+  state = {};
 
-  let value2 = dateChangeHandler();
-  console.log(props);
-  console.log(props.imgLoading);
-  // poster path null gelince exception yapılacak
-  return (
-    <div className={styles.Result}>
-      <div className={styles.ResultInner}>
-        {props.imgLoading ? <Spinner /> : null}
-        {/* {this.props.imageLoading ? spinner : ""} */}
-        <img
-          style={{ display: props.imgLoading ? "none" : "block" }}
-          onLoad={props.imageLoadHandler}
-          src={"https://image.tmdb.org/t/p/w500" + props.poster_path}
-          alt={props.title}
-        />
-        <ul>
-          <li> {props.title}</li>
-          {/* <p>{props.director}</p> */}
-          <li>{value2}</li>
-        </ul>
+  render() {
+    const dateChangeHandler = () => {
+      // console.log(this.props.release_date);
+      if (
+        this.props.release_date === "" ||
+        this.props.release_date === undefined
+      ) {
+        return "";
+      }
+      let output = this.props.release_date.slice(0, 4);
+      // console.log(output);
+      return output;
+    };
+
+    let releaseYear = dateChangeHandler();
+    // console.log(this.props);
+    // console.log(this.props.imgLoading);
+    // poster path null gelince exception yapılacak
+    // console.log(this.props.poster_path);
+
+    const imgError = <h1>Image is not available</h1>;
+    return (
+      <div className={styles.Result}>
+        <div className={styles.ResultInner}>
+          {this.props.imgLoading ? <Spinner /> : null}
+          {/* {this.this.props.imageLoading ? spinner : ""} */}
+          {this.props.poster_path !== null ? (
+            <img
+              style={{ display: this.props.imgLoading ? "none" : "block" }}
+              onLoad={this.props.imageLoadHandler}
+              src={"https://image.tmdb.org/t/p/w500" + this.props.poster_path}
+              alt={this.props.title}
+            />
+          ) : (
+            imgError
+          )}
+          {/* {this.props.imgErrorReturn ? this.props.imageLoadHandler : null} */}
+          <ul>
+            <li> {this.props.title}</li>
+            {/* <p>{this.props.director}</p> */}
+            <li>{releaseYear ? releaseYear : <p>Year is not available</p>}</li>
+          </ul>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default result;
+export default Result;

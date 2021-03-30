@@ -7,6 +7,7 @@ import Spinner from "../../components/Spinner/Spinner";
 
 class Results extends Component {
   state = {
+    imageError: false,
     loading: false,
     imageLoading: true,
     films: null,
@@ -78,12 +79,10 @@ class Results extends Component {
   };
   componentDidUpdate(prevProps, prevState) {
     // console.log(this.props.location.pathname);
-    console.log(prevProps.location.pathname);
-    if (
-      this.props.location.pathname !== prevProps.location.pathname &&
-      this.props.location.pathname !== "/"
-    ) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
       this.setState({ loading: true, imageLoading: true });
+      if (this.props.location.pathname === "/")
+        this.setState({ loading: false, imageLoading: true });
       this.fetchFilms();
     }
 
@@ -100,7 +99,7 @@ class Results extends Component {
     // console.log(url.pathname.slice(1));
     let searchQuery = url.pathname.slice(1).split("&");
     let finalUrl = "";
-    console.log(searchQuery);
+    // console.log(searchQuery);
     if (searchQuery[0] !== "*" && searchQuery[1] !== "*") {
       finalUrl =
         fetchURL +
@@ -123,7 +122,7 @@ class Results extends Component {
         "&include_adult=false";
     }
     // console.log(searchQuery.join(""));
-    console.log(finalUrl);
+    // console.log(finalUrl);
 
     if (searchQuery.join("") === "") {
       this.setState({ films: null });
@@ -132,23 +131,26 @@ class Results extends Component {
 
     fetch(finalUrl)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         return result.json();
       })
       .then((data) => {
-        console.log(data.results.length === 0);
+        // console.log(data.results.length === 0);
         if (data.results.length === 0) {
           data.results = 0;
           console.log("sss");
         }
-        console.log(this.state.films);
+        // console.log(this.state.films);
         this.setState({ films: data.results });
       })
       .catch((err) => console.log(err));
   };
   imageLoadHandler = () => {
+    // console.log(this.state.imageLoading);
     this.setState({ imageLoading: false });
+    // console.log(this.state.imageLoading);
   };
+
   render() {
     let renderFilms = null;
     if (this.state.loading) {
@@ -158,9 +160,9 @@ class Results extends Component {
     // console.log(Object.keys(this.state.films));
 
     if (this.state.films != null) {
-      console.log(this.state.films);
+      // console.log(this.state.films);
       const renderArray = Object.keys(this.state.films);
-      console.log(renderArray);
+      // console.log(renderArray);
       renderFilms = renderArray.map((arr) => {
         //   console.log(this.state.films[arr]);
         return (

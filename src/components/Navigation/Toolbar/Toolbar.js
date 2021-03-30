@@ -4,7 +4,8 @@ import styles from "./Toolbar.module.css";
 import { withRouter } from "react-router-dom";
 
 const toolbar = (props) => {
-  const clicked = () => {
+  const clicked = (event) => {
+    event.preventDefault();
     props.history.push("/");
   };
   return (
