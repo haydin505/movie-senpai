@@ -5,7 +5,10 @@
   font-family: "Open Sans";
 
   background-image: url("../../assets//images/background-image-1.jpeg");
-
+  margin: 0;
+  box-sizing: border-box;
+  display: block;
+  padding: 0;
   filter: blur(0px);
   background-size: cover;
   background-attachment: fixed;
@@ -22,8 +25,6 @@
 
 @media only screen and (max-width: 465px) {
   .Layout {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     background-image: url("../../assets//images/background-image-1.jpeg");
     filter: blur(0px);
     background-position: center;

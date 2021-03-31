@@ -27,7 +27,10 @@ class Result extends Component {
 
     const imgError = <h1>Image is not available</h1>;
     return (
-      <div className={styles.Result}>
+      <div
+        className={styles.Result}
+        onClick={() => this.props.clicked(this.props.title)}
+      >
         <div className={styles.ResultInner}>
           {this.props.imgLoading ? <Spinner /> : null}
           {/* {this.this.props.imageLoading ? spinner : ""} */}

@@ -138,7 +138,7 @@ class Results extends Component {
         // console.log(data.results.length === 0);
         if (data.results.length === 0) {
           data.results = 0;
-          console.log("sss");
+          // console.log("sss");
         }
         // console.log(this.state.films);
         this.setState({ films: data.results });
@@ -171,6 +171,7 @@ class Results extends Component {
             {...this.state.films[arr]}
             imgLoading={this.state.imageLoading}
             imageLoadHandler={this.imageLoadHandler}
+            clicked={this.props.clicked}
           />
         );
       });

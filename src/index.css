@@ -8,6 +8,8 @@ body {
 
   color: white;
   /* bottom: 0; */
+  /* overflow-y: visible; */
+  /* display: flex; */
 }
 
 code {

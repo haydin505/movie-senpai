@@ -1,0 +1,60 @@
+.Sidebar {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  offset-block-end: auto;
+  top: 0;
+  /* bottom: 0; */
+  right: 0;
+  /* offset: 10%; */
+  height: 50vh;
+  width: 30%;
+  background-color: rgba(0, 0, 0, 0.753);
+  /* position: fixed; */
+  /* display: block; */
+  /* box-sizing: border-box; */
+  z-index: 250;
+  /* display: flex; */
+  /* --offset: -50px; */
+  flex-grow: 1;
+  flex-basis: 300px;
+  align-self: start;
+  position: sticky;
+  /* top: var(--offset); */
+}
+@font-face {
+  font-family: "MyWebFont2";
+  src: url("../../assets/fonts/Chicago3D.ttf") format("truetype");
+}
+p {
+  /* box-sizing: border-box; */
+  font-size: 250%;
+  margin: 0;
+  padding: 3% 2%;
+  font-family: "MyWebFont2";
+}
+
+.Icon {
+  margin-top: 3%;
+  border-radius: 20px;
+  box-sizing: border-box;
+  border: 2px solid white;
+  color: "white";
+  font-size: 150%;
+  position: relative;
+  /* padding-top: 4%; */
+  left: 40%;
+  cursor: pointer;
+}
+.Frame {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media only screen and (max-width: 465px) {
+  .Sidebar {
+    width: 50%;
+    height: auto;
+  }
+}
