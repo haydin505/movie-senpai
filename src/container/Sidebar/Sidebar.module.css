@@ -1,3 +1,7 @@
+.Sidebar p:last-child {
+  overflow-y: scroll;
+}
+
 .Sidebar {
   /* display: none; */
   width: 25%;
@@ -26,10 +30,13 @@
 }
 
 .Sidebar iframe {
-  box-sizing: border-box;
-  border: 0;
+  width: 90%;
+  margin: 5%;
+
+  /* box-sizing: initial; */
+  border: 2px solid rgba(255, 255, 255, 0.301);
   /* margin: 5% 5%; */
-  padding: 5% 5%;
+  padding: 2.5% 2.5%;
 }
 
 .MovieOverview {
@@ -208,5 +215,9 @@
     padding: 0 5%;
     font-size: 90%;
     text-align: justify;
+  }
+
+  .Sidebar p:last-child {
+    overflow-y: scroll;
   }
 }
