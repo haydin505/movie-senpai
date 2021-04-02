@@ -82,7 +82,7 @@ class Results extends Component {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.setState({ loading: true, imageLoading: true });
       if (this.props.location.pathname === "/")
-        this.setState({ loading: false, imageLoading: true });
+        this.setState({ loading: false, imageLoading: true, films: null });
       this.fetchFilms();
     }
 
@@ -100,7 +100,13 @@ class Results extends Component {
     let searchQuery = url.pathname.slice(1).split("&");
     let finalUrl = "";
     // console.log(searchQuery);
-    if (searchQuery[0] !== "*" && searchQuery[1] !== "*") {
+    // console.log(searchQuery[1].slice(-4));
+    if (searchQuery[0] === "*") {
+      this.setState({ films: 0 });
+      return;
+    }
+    if (searchQuery[0] === "" || searchQuery[1].slice(-4) === "") return;
+    if (searchQuery[0] !== "*" && searchQuery[1].slice(-4) !== "=all") {
       finalUrl =
         fetchURL +
         "/search/movie?api_key=" +
@@ -109,10 +115,10 @@ class Results extends Component {
         searchQuery[0] +
         "&include_adult=false" +
         "&primary_release_year=" +
-        searchQuery[1];
+        searchQuery[1].slice(-4);
     }
 
-    if (searchQuery[0] !== "*" && searchQuery[1] === "*") {
+    if (searchQuery[0] !== "*" && searchQuery[1].slice(-4) === "=all") {
       finalUrl =
         fetchURL +
         "/search/movie?api_key=" +
@@ -121,6 +127,7 @@ class Results extends Component {
         searchQuery[0] +
         "&include_adult=false";
     }
+
     // console.log(searchQuery.join(""));
     // console.log(finalUrl);
 
@@ -136,6 +143,7 @@ class Results extends Component {
       })
       .then((data) => {
         // console.log(data.results.length === 0);
+        if (data.results === undefined) return;
         if (data.results.length === 0) {
           data.results = 0;
           // console.log("sss");
@@ -176,8 +184,8 @@ class Results extends Component {
         );
       });
     }
-    // if (this.state.films == null)
-    //   renderFilms = <h2>You can search for the films above</h2>;
+
+    if (this.state.films === null) renderFilms = null;
 
     if (this.state.films === 0)
       renderFilms = <h2>Senpai couldn't find any results.</h2>;

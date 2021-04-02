@@ -12,6 +12,21 @@
   -ms-transform: translateZ(0);
   transform: translateZ(0);
 }
+
+@media only screen and (max-width: 892px) {
+  .Loader {
+    box-sizing: border-box;
+    padding: 5% 5%;
+    font-size: 150%;
+  }
+}
+@media only screen and (max-width: 465px) {
+  .Loader {
+    box-sizing: border-box;
+    padding: 5% 5%;
+    font-size: 78%;
+  }
+}
 @-webkit-keyframes load5 {
   0%,
   100% {

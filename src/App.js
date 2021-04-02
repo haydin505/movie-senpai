@@ -7,26 +7,21 @@ import Results from "./container/Results/Results";
 import { BrowserRouter } from "react-router-dom";
 import { useState } from "react";
 import Sidebar from "./container/Sidebar/Sidebar";
-function App() {
+function App(props) {
   const [showSidebar, setShowSidebar] = useState(false);
   const [targetTitle, setTargetTitle] = useState("");
 
   const logClicked = (event) => {
+    // console.log(event);
     setShowSidebar(true);
     setTargetTitle(event);
-  };
-
-  const buttonCloseClicked = () => {
-    setShowSidebar(false);
   };
 
   return (
     <BrowserRouter>
       <div>
+        {showSidebar ? <Sidebar title={targetTitle} /> : null}
         <Layout>
-          {showSidebar ? (
-            <Sidebar title={targetTitle} btnClicked={buttonCloseClicked} />
-          ) : null}
           <Toolbar />
           <SearchContainer />
           <Results clicked={logClicked} />

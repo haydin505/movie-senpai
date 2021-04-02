@@ -29,7 +29,9 @@ class Result extends Component {
     return (
       <div
         className={styles.Result}
-        onClick={() => this.props.clicked(this.props.title)}
+        onClick={() =>
+          this.props.clicked([this.props.title, this.props.overview])
+        }
       >
         <div className={styles.ResultInner}>
           {this.props.imgLoading ? <Spinner /> : null}
