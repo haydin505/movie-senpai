@@ -25,7 +25,11 @@ class Result extends Component {
     // poster path null gelince exception yapılacak
     // console.log(this.props.poster_path);
 
-    const imgError = <h1>Image is not available</h1>;
+    const imgError = (
+      <div className={styles.ImageError}>
+        <h1>Image not available</h1>
+      </div>
+    );
     return (
       <div
         className={styles.Result}
@@ -34,24 +38,34 @@ class Result extends Component {
         }
       >
         <div className={styles.ResultInner}>
-          {this.props.imgLoading ? <Spinner /> : null}
-          {/* {this.this.props.imageLoading ? spinner : ""} */}
-          {this.props.poster_path !== null ? (
-            <img
-              style={{ display: this.props.imgLoading ? "none" : "block" }}
-              onLoad={this.props.imageLoadHandler}
-              src={"https://image.tmdb.org/t/p/w500" + this.props.poster_path}
-              alt={this.props.title}
-            />
-          ) : (
-            imgError
-          )}
-          {/* {this.props.imgErrorReturn ? this.props.imageLoadHandler : null} */}
-          <ul>
-            <li> {this.props.title}</li>
-            {/* <p>{this.props.director}</p> */}
-            <li>{releaseYear ? releaseYear : <p>Year is not available</p>}</li>
-          </ul>
+          <div className={styles.ImageWrapper}>
+            {this.props.imgLoading ? <Spinner /> : null}
+            {/* {this.this.props.imageLoading ? spinner : ""} */}
+            {this.props.poster_path !== null ? (
+              <img
+                style={{ display: this.props.imgLoading ? "none" : "block" }}
+                onLoad={this.props.imageLoadHandler}
+                src={"https://image.tmdb.org/t/p/w500" + this.props.poster_path}
+                alt={this.props.title}
+              />
+            ) : (
+              imgError
+            )}
+          </div>
+          <div className={styles.TitleWrapper}>
+            {/* {this.props.imgErrorReturn ? this.props.imageLoadHandler : null} */}
+            <ul>
+              <li>
+                <span>{this.props.title}</span>
+              </li>
+              {/* <p>{this.props.director}</p> */}
+              <li>
+                <span>
+                  {releaseYear ? releaseYear : <p>Year is not available</p>}
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     );
