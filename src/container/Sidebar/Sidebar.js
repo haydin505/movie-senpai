@@ -51,7 +51,7 @@ function Sidebar(props) {
         className={styles.Frame}
         width="420"
         height="315"
-        src={`https://www.youtube.com/embed/${videoId}`}
+        src={`https://www.youtube.com/embed/${videoId}?playsinline=1`}
       ></iframe>
       <div className={styles.SocialIcons}>
         <SocialIcon className={styles.SocialIcon} network="twitter" />
