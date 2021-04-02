@@ -27,10 +27,8 @@
 @media only screen and (max-width: 465px) {
   .Layout {
     background-image: url("../../assets//images/background-image-1.jpeg");
-    filter: blur(0px);
     background-position: center;
-    width: 100%;
     background-attachment: fixed;
-    position: relative;
+    /* position: relative; */
   }
 }

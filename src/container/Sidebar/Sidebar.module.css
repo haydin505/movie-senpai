@@ -25,6 +25,13 @@
   transition: all 1.8s;
 }
 
+.Sidebar iframe {
+  box-sizing: border-box;
+  border: 0;
+  /* margin: 5% 5%; */
+  padding: 5% 5%;
+}
+
 .MovieOverview {
   font-size: 90%;
   padding: 0 5%;

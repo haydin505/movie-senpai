@@ -4,18 +4,15 @@ import { useHistory } from "react-router-dom";
 const SearchContainer = (props) => {
   const [title, setTitle] = useState("*");
   const [year, setYear] = useState("all");
-  // let change = null;
-  // let title = "*";
-  // let year = "*";
   const history = useHistory();
-  // console.log(props);
+
   function searchSubmitHandler(event) {
     event.preventDefault();
     history.push("/" + title + "&year=" + year);
-    setYear("all");
-    setTitle("*");
     document.getElementById("searchBar").value = "";
     document.getElementById("yearListBox").value = "all";
+    // setTitle("*");
+    // setYear("all");
   }
 
   // componentDidUpdate
@@ -25,15 +22,11 @@ const SearchContainer = (props) => {
       firstUpdate.current = false;
       return;
     }
-    // console.log("a");
-    history.push("/" + title + "&" + year);
+    history.push("/" + title + "&year=" + year);
   }, [history, title, year]);
 
-  // useEffect(() => {
-  //   history.push("/" + title + "&" + year);
-  // }, [year]);
-
   function searchElasticHandler(event) {
+    event.preventDefault();
     setTitle(event.target.value);
   }
 
@@ -43,6 +36,7 @@ const SearchContainer = (props) => {
   // }
 
   function optionValueChangedHandler(event) {
+    event.preventDefault();
     // console.log(event.target.value);
     setYear(event.target.value);
     // year = event.target.value;

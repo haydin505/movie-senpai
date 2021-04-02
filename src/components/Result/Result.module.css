@@ -1,13 +1,14 @@
 .Result {
   margin: auto auto;
   box-sizing: border-box;
-  border: 2px solid rgb(17, 16, 16);
+  border: 4px solid rgba(17, 16, 16, 0.582);
   border-radius: 10px;
   background-color: rgba(245, 2, 2, 0.233);
   box-shadow: 0px 0px 6px rgb(219, 76, 76);
   /* width: auto; */
   width: 20%;
-
+  height: 20%;
+  /* min-height: 425px; */
   /* height: 10%; */
   /* height: 20%; */
   /* height: 20%; */
