@@ -8,7 +8,7 @@ const SearchContainer = (props) => {
 
   function searchSubmitHandler(event) {
     event.preventDefault();
-    history.push("/search/" + title + "&year=" + year);
+    history.push("/search?title=" + title + "&year=" + year);
     document.getElementById("searchBar").value = "";
     document.getElementById("yearListBox").value = "all";
     // setTitle("*");
@@ -22,7 +22,7 @@ const SearchContainer = (props) => {
       firstUpdate.current = false;
       return;
     }
-    history.push("/search?" + "title=" + title + "&year=" + year);
+    history.push("/search?title=" + title + "&year=" + year);
   }, [history, title, year]);
 
   function searchElasticHandler(event) {

@@ -26,8 +26,8 @@ function App(props) {
         {showSidebar ? <Sidebar title={targetTitle} /> : null}
         <Layout>
           <Toolbar />
+          <Route path="/" component={SearchContainer} />
           <Route path="/login" component={Login} />
-          <Route path="/search" component={SearchContainer} />
           {/* <SearchContainer /> */}
           <Route exact path="/favorites" component={Favorites} />
           <Route
