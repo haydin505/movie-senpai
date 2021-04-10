@@ -4,9 +4,12 @@ import Layout from "./hoc/Layout/Layout";
 import SearchContainer from "./container/SearchContainer/SearchContainer";
 import Toolbar from "./components/Navigation/Toolbar/Toolbar";
 import Results from "./container/Results/Results";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import { useState } from "react";
 import Sidebar from "./container/Sidebar/Sidebar";
+import Favorites from "./container/Favorites/Favorites";
+import Login from "./container/Login/Login";
+
 function App(props) {
   const [showSidebar, setShowSidebar] = useState(false);
   const [targetTitle, setTargetTitle] = useState("");
@@ -23,8 +26,17 @@ function App(props) {
         {showSidebar ? <Sidebar title={targetTitle} /> : null}
         <Layout>
           <Toolbar />
-          <SearchContainer />
-          <Results clicked={logClicked} />
+          <Route path="/login" component={Login} />
+          <Route path="/search" component={SearchContainer} />
+          {/* <SearchContainer /> */}
+          <Route exact path="/favorites" component={Favorites} />
+          <Route
+            path="/search"
+            render={(routeProps) => (
+              <Results clicked={logClicked} {...routeProps} />
+            )}
+          />
+          {/* <Results clicked={logClicked} /> */}
         </Layout>
       </div>
     </BrowserRouter>

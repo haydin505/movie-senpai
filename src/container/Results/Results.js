@@ -78,8 +78,18 @@ class Results extends Component {
     // },
   };
   componentDidUpdate(prevProps, prevState) {
-    // console.log(this.props.location.pathname);
-    if (this.props.location.pathname !== prevProps.location.pathname) {
+    console.log(this.props.location.search);
+    console.log(prevProps.location.search);
+    console.log(this.props.location.search.replaceAll(" ", ""));
+    console.log(prevProps.location.search.replaceAll(" ", ""));
+    console.log(prevState);
+    if (this.props.location.search === "?title=&year=all") {
+      this.props.history.push("/");
+    }
+    if (
+      this.props.location.search.replaceAll(" ", "") !==
+      prevProps.location.search.replaceAll(" ", "")
+    ) {
       this.setState({ loading: true, imageLoading: true });
       if (this.props.location.pathname === "/")
         this.setState({ loading: false, imageLoading: true, films: null });
@@ -92,49 +102,71 @@ class Results extends Component {
   componentDidMount() {
     this.fetchFilms();
   }
+
   fetchFilms = () => {
-    // console.log(API_KEY);
-    // console.log(window.location.href);
-    const url = new URL(window.location.href);
-    // console.log(url.pathname.slice(1));
-    let searchQuery = url.pathname.slice(1).split("&");
-    let finalUrl = "";
+    // // console.log(API_KEY);
+    // // console.log(window.location.href);
+    // const url = new URL(window.location.href);
+    // // console.log(url.pathname.slice(1));
+    // console.log(url.pathname);
+    // let searchQuery = url.pathname.slice(1).split("&");
+    // let finalUrl = "";
     // console.log(searchQuery);
-    // console.log(searchQuery[1].slice(-4));
-    if (searchQuery[0] === "*") {
-      this.setState({ films: 0 });
-      return;
-    }
-    if (searchQuery[0] === "" || searchQuery[1].slice(-4) === "") return;
-    if (searchQuery[0] !== "*" && searchQuery[1].slice(-4) !== "=all") {
-      finalUrl =
-        fetchURL +
-        "/search/movie?api_key=" +
-        API_KEY +
-        "&query=" +
-        searchQuery[0] +
-        "&include_adult=false" +
-        "&primary_release_year=" +
-        searchQuery[1].slice(-4);
-    }
 
-    if (searchQuery[0] !== "*" && searchQuery[1].slice(-4) === "=all") {
-      finalUrl =
-        fetchURL +
-        "/search/movie?api_key=" +
-        API_KEY +
-        "&query=" +
-        searchQuery[0] +
-        "&include_adult=false";
-    }
+    // if (searchQuery[0] === "*") {
+    //   this.setState({ films: 0 });
+    //   return;
+    // }
+    // if (searchQuery[0] === "" || searchQuery[1].slice(-4) === "") return;
+    // if (searchQuery[0] !== "*" && searchQuery[1].slice(-4) !== "=all") {
+    //   finalUrl =
+    //     fetchURL +
+    //     "/search/movie?api_key=" +
+    //     API_KEY +
+    //     "&query=" +
+    //     searchQuery[0] +
+    //     "&include_adult=false" +
+    //     "&primary_release_year=" +
+    //     searchQuery[1].slice(-4);
+    // }
 
-    // console.log(searchQuery.join(""));
-    // console.log(finalUrl);
+    // if (searchQuery[0] !== "*" && searchQuery[1].slice(-4) === "=all") {
+    //   finalUrl =
+    //     fetchURL +
+    //     "/search/movie?api_key=" +
+    //     API_KEY +
+    //     "&query=" +
+    //     searchQuery[0] +
+    //     "&include_adult=false";
+    // }
 
-    if (searchQuery.join("") === "") {
-      this.setState({ films: null });
-      return;
-    }
+    // // console.log(searchQuery.join(""));
+    // // console.log(finalUrl);
+
+    // if (searchQuery.join("") === "") {
+    //   this.setState({ films: null });
+    //   return;
+    // }
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const title = urlParams.get("title");
+    const year = urlParams.get("year");
+    if (!title) return;
+
+    console.log(title);
+    console.log(year);
+
+    let finalUrl = "";
+    finalUrl =
+      fetchURL +
+      "/search/movie?api_key=" +
+      API_KEY +
+      "&query=" +
+      title +
+      "&include_adult=false" +
+      "&primary_release_year=" +
+      year;
 
     fetch(finalUrl)
       .then((result) => {
@@ -142,7 +174,8 @@ class Results extends Component {
         return result.json();
       })
       .then((data) => {
-        // console.log(data.results.length === 0);
+        console.log(data.results);
+        console.log(data.results.length === 0);
         if (data.results === undefined) return;
         if (data.results.length === 0) {
           data.results = 0;
@@ -155,6 +188,7 @@ class Results extends Component {
   };
   imageLoadHandler = () => {
     // console.log(this.state.imageLoading);
+    console.log("imageLoadHandler fired");
     this.setState({ imageLoading: false });
     // console.log(this.state.imageLoading);
   };

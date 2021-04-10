@@ -1,5 +1,5 @@
 .Loader {
-  margin: 100px auto;
+  margin: auto auto;
   font-size: 25px;
   width: 1em;
   height: 1em;
@@ -11,6 +11,8 @@
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
+  display: flex;
+  box-sizing: border-box;
 }
 
 @media only screen and (max-width: 892px) {

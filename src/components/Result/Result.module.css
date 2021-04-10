@@ -71,6 +71,7 @@
 
 .ImageWrapper {
   height: 350px;
+  display: flex;
 }
 
 .Result img {
@@ -118,6 +119,31 @@
   height: 50%;
   font-size: 12px;
   box-sizing: border-box;
+  padding: 0%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+ul li {
+  /* padding: 50%; */
+  display: block;
+  height: 5em;
+  line-height: 22px;
+  border: 1px solid #ff0000;
+}
+
+ul li span {
+  box-sizing: border-box;
+  /* padding: 3%; */
+  display: inline-block;
+  vertical-align: middle;
+}
+
+ul li:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
 }
 
 .ImageError {
@@ -226,6 +252,7 @@
   .ImageWrapper {
     height: 150px;
     width: auto;
+    display: flex;
   }
 
   .Result img {
@@ -285,16 +312,16 @@
   }
 
   ul li {
-    padding: 20%;
     display: block;
-    height: 1em;
+    height: 5em;
     line-height: 8px;
     border: 1px solid #ff0000;
   }
 
   ul li span {
+    margin: 1px 1px;
     box-sizing: border-box;
-    padding: 3%;
+    /* padding: 3%; */
     display: inline-block;
     vertical-align: middle;
   }
