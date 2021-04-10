@@ -78,11 +78,11 @@ class Results extends Component {
     // },
   };
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.props.location.search);
-    console.log(prevProps.location.search);
-    console.log(this.props.location.search.replaceAll(" ", ""));
-    console.log(prevProps.location.search.replaceAll(" ", ""));
-    console.log(prevState);
+    // console.log(this.props.location.search);
+    // console.log(prevProps.location.search);
+    // console.log(this.props.location.search.replaceAll(" ", ""));
+    // console.log(prevProps.location.search.replaceAll(" ", ""));
+    // console.log(prevState);
     if (this.props.location.search === "?title=&year=all") {
       this.props.history.push("/");
     }
@@ -154,8 +154,8 @@ class Results extends Component {
     const year = urlParams.get("year");
     if (!title) return;
 
-    console.log(title);
-    console.log(year);
+    // console.log(title);
+    // console.log(year);
 
     let finalUrl = "";
     finalUrl =
@@ -174,8 +174,8 @@ class Results extends Component {
         return result.json();
       })
       .then((data) => {
-        console.log(data.results);
-        console.log(data.results.length === 0);
+        // console.log(data.results);
+        // console.log(data.results.length === 0);
         if (data.results === undefined) return;
         if (data.results.length === 0) {
           data.results = 0;
@@ -188,7 +188,7 @@ class Results extends Component {
   };
   imageLoadHandler = () => {
     // console.log(this.state.imageLoading);
-    console.log("imageLoadHandler fired");
+    // console.log("imageLoadHandler fired");
     this.setState({ imageLoading: false });
     // console.log(this.state.imageLoading);
   };
