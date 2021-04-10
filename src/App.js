@@ -14,16 +14,22 @@ function App(props) {
   const [showSidebar, setShowSidebar] = useState(false);
   const [targetTitle, setTargetTitle] = useState("");
 
-  const logClicked = (event) => {
+  const resultClicked = (event) => {
     // console.log(event);
     setShowSidebar(true);
     setTargetTitle(event);
   };
 
+  const closeButtonClicked = () => {
+    setShowSidebar(false);
+  };
+
   return (
     <BrowserRouter>
       <div>
-        {showSidebar ? <Sidebar title={targetTitle} /> : null}
+        {showSidebar ? (
+          <Sidebar title={targetTitle} clicked={closeButtonClicked} />
+        ) : null}
         <Layout>
           <Toolbar />
           <Route path="/" component={SearchContainer} />
@@ -33,7 +39,7 @@ function App(props) {
           <Route
             path="/search"
             render={(routeProps) => (
-              <Results clicked={logClicked} {...routeProps} />
+              <Results clicked={resultClicked} {...routeProps} />
             )}
           />
           {/* <Results clicked={logClicked} /> */}

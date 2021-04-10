@@ -8,10 +8,12 @@ function Sidebar(props) {
   // console.log(props);
   const [videoId, setVideoId] = useState("");
   const [showDisplay, setShowDisplay] = useState(false);
-
+  const [YOUTUBE_API_KEY, setYOUTUBE_API_KEY] = useState(
+    "AIzaSyAS2KFJrLKLPs_WAvcntfstOqM6lohww3E"
+  );
   // useEffect(() => {
-
-  // }, []);
+  //   console.log(YOUTUBE_API_KEY);
+  // }, [YOUTUBE_API_KEY]);
 
   useEffect(() => {
     setShowDisplay(true);
@@ -27,7 +29,7 @@ function Sidebar(props) {
         //   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=${encode}&type=video&key=AIzaSyAS2KFJrLKLPs_WAvcntfstOqM6lohww3E`
         // );
         const id = await axios.get(
-          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=${encode}&type=video&key=AIzaSyAS2KFJrLKLPs_WAvcntfstOqM6lohww3E`
+          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=${encode}&type=video&key=${YOUTUBE_API_KEY}`
           // `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=viewCount&q=${encode}&type=video&key=AIzaSyAS2KFJrLKLPs_WAvcntfstOqM6lohww3E`
         );
         // console.log(id);
@@ -36,19 +38,31 @@ function Sidebar(props) {
         setVideoId(id.data.items[0].id.videoId);
       } catch (err) {
         console.log(err);
+        if (YOUTUBE_API_KEY === "AIzaSyAS2KFJrLKLPs_WAvcntfstOqM6lohww3E") {
+          setYOUTUBE_API_KEY("AIzaSyCK_tbR-tEFpZvgumAA2v1IwVje9dAxU2Y");
+        }
+        if (YOUTUBE_API_KEY === "AIzaSyCK_tbR-tEFpZvgumAA2v1IwVje9dAxU2Y") {
+          setYOUTUBE_API_KEY("AIzaSyAS2KFJrLKLPs_WAvcntfstOqM6lohww3E");
+        }
       }
       // .then((result) => console.log(result.data.items[0].id.videoId));
     }
 
     getVideoId();
-  }, [props.title]);
+  }, [props.title, YOUTUBE_API_KEY]);
 
   const closeButtonClickedHandler = () => {
     setShowDisplay(false);
+    setTimeout(() => props.clicked(), 1800);
+    // console.log(YOUTUBE_API_KEY);
   };
 
   return (
-    <div className={showDisplay ? styles.Sidebar : styles.SidebarNone}>
+    <div
+      className={
+        showDisplay ? styles.Sidebar : `${styles.Sidebar} ${styles.SidebarNone}`
+      }
+    >
       <IconContext.Provider value={{ className: styles.Icon }}>
         <AiOutlineClose onClick={closeButtonClickedHandler} />
       </IconContext.Provider>
@@ -67,8 +81,9 @@ function Sidebar(props) {
         <SocialIcon className={styles.SocialIcon} network="youtube" />
         <SocialIcon className={styles.SocialIcon} network="instagram" />
       </div>
-
-      <p className={styles.MovieOverview}>{props.title[1]}</p>
+      <div className={styles.MovieOverviewBox}>
+        <p className={styles.MovieOverview}>{props.title[1]}</p>
+      </div>
     </div>
   );
 }
