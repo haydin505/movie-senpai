@@ -17,17 +17,25 @@ function Sidebar(props) {
     setShowDisplay(true);
     async function getVideoId() {
       try {
-        const encode = encodeURI(props.title + " movie trailer");
+        // console.log(props.title[0]);
+        const encode = encodeURI(
+          props.title[0].toLowerCase() + " official trailer"
+        );
+        // const encode = props.title[0] + " official trailer";
         // console.log(encode);
+        // console.log(
+        //   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=${encode}&type=video&key=AIzaSyAS2KFJrLKLPs_WAvcntfstOqM6lohww3E`
+        // );
         const id = await axios.get(
-          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=viewCount&q=${encode}&type=video&key=AIzaSyAS2KFJrLKLPs_WAvcntfstOqM6lohww3E`
+          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q=${encode}&type=video&key=AIzaSyAS2KFJrLKLPs_WAvcntfstOqM6lohww3E`
+          // `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=viewCount&q=${encode}&type=video&key=AIzaSyAS2KFJrLKLPs_WAvcntfstOqM6lohww3E`
         );
         // console.log(id);
         // console.log(id.data.items[0].id.videoId);
 
         setVideoId(id.data.items[0].id.videoId);
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
       }
       // .then((result) => console.log(result.data.items[0].id.videoId));
     }
