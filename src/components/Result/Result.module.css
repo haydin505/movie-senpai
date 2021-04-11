@@ -7,7 +7,7 @@
   box-shadow: 0px 0px 6px rgb(219, 76, 76);
   /* width: auto; */
   width: 250px;
-  height: 475px;
+  height: 502px;
   /* min-height: 425px; */
   /* height: 10%; */
   /* height: 20%; */
@@ -24,6 +24,10 @@
   display: inline-block;
   vertical-align: text-top;
   transition: all 0.5s;
+}
+
+.Icons {
+  size: 100px;
 }
 
 .ResultInner {
@@ -150,6 +154,27 @@ ul li:before {
   height: 100%;
   width: 100%;
 }
+
+.Icons {
+  border: 1px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 2%;
+}
+
+.IconsTable {
+  height: 400px;
+  display: inline-table;
+}
+.Result li.IconsBox {
+  text-align: center;
+  vertical-align: middle;
+  padding: 0%;
+  margin-top: 6px;
+  height: 25px;
+  width: 50%;
+}
 @media only screen and (max-width: 700px) {
   .Result li {
     /* font-size: 8px; */
@@ -187,7 +212,7 @@ ul li:before {
     box-shadow: 0px 0px 6px rgb(219, 76, 76);
     /* width: auto; */
     width: 120px;
-    height: 212px;
+    height: 232px;
     /* min-height: 425px; */
     /* height: 10%; */
     /* height: 20%; */
@@ -331,5 +356,25 @@ ul li:before {
     display: inline-block;
     vertical-align: middle;
     height: 100%;
+  }
+  .Icons {
+    border: 1px;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0%;
+  }
+
+  .IconsTable {
+    height: 400px;
+    display: inline-table;
+  }
+  .Result li.IconsBox {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0%;
+    margin-top: 6px;
+    height: 17px;
+    width: 50%;
   }
 }

@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import Result from "../../components/Result/Result";
 import * as actions from "../../store/actions/index";
 import Spinner from "../../components/Spinner/Spinner";
-import styles from "./Favorites.module.css";
+import styles from "./Watchlater.module.css";
 
-class Favorites extends Component {
+class Watchlater extends Component {
   state = {
     imageError: false,
     loading: false,
@@ -14,6 +14,7 @@ class Favorites extends Component {
 
   componentDidMount() {
     if (this.props.loggedIn) {
+      // console.log(this.props.userCredential);
       this.props.fetchFavoriteMovies(this.props.userCredential.uid);
       this.props.fetchWatchlaterMovies(this.props.userCredential.uid);
     }
@@ -35,20 +36,20 @@ class Favorites extends Component {
     // console.log(this.state);
     // console.log(Object.keys(this.props.fetchedMovies));
 
-    if (this.props.favoriteMovies != null) {
-      // console.log(this.props.favoriteMovies);
+    if (this.props.watchLaterMovies != null) {
+      // console.log(this.props.watchLaterMovies);
 
-      // console.log(Object.keys(this.props.favoriteMovies));
+      // console.log(Object.keys(this.props.watchLaterMovies));
       // console.log(this.props.fetchedMovies);
-      const renderArray = Object.keys(this.props.favoriteMovies);
+      const renderArray = Object.keys(this.props.watchLaterMovies);
       // console.log(renderArray);
       renderFilms = renderArray.map((arr) => {
-        // console.log(this.props.favoriteMovies[arr]);
+        // console.log(this.props.watchLaterMovies[arr]);
         return (
           <Result
-            key={this.props.favoriteMovies[arr].id}
-            {...this.props.favoriteMovies[arr]}
-            fetchedMovies={this.props.favoriteMovies[arr]}
+            key={this.props.watchLaterMovies[arr].id}
+            {...this.props.watchLaterMovies[arr]}
+            fetchedMovies={this.props.watchLaterMovies[arr]}
             imgLoading={this.state.imageLoading}
             imageLoadHandler={this.imageLoadHandler}
             clicked={this.props.clicked}
@@ -57,12 +58,12 @@ class Favorites extends Component {
       });
     }
 
-    if (this.props.favoriteMovies === null) renderFilms = null;
+    if (this.props.watchLaterMovies === null) renderFilms = null;
 
-    if (this.props.favoriteMovies === 0)
+    if (this.props.watchLaterMovies === 0)
       renderFilms = <h2>Senpai couldn't find any results.</h2>;
     return (
-      <div className={styles.Favorites}>
+      <div className={styles.Watchlater}>
         {/* <Spinner /> */}
         {renderFilms}
       </div>
@@ -81,6 +82,7 @@ class Favorites extends Component {
 const mapStateToProps = (state) => {
   return {
     favoriteMovies: state.userDataReducer.favoriteMovies,
+    watchLaterMovies: state.userDataReducer.watchLaterMovies,
     fetchedMovies: state.userDataReducer.fetchedMovies,
     fetchMoviesError: state.userDataReducer.fetchMoviesError,
     loggedIn: state.authenticationReducer.userCredential !== null,
@@ -91,10 +93,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchFavoriteMovies: (userId) =>
-      dispatch(actions.fetchFavoriteMovies(userId)),
+      dispatch(actions.fetchWatchlaterMovies(userId)),
     fetchWatchlaterMovies: (userId) =>
       dispatch(actions.fetchWatchlaterMovies(userId)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(Watchlater);
