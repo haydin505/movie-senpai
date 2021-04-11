@@ -12,9 +12,7 @@ class Result extends Component {
 
   favoriteClickedHandler = (movieId) => {
     if (!this.props.loggedIn) {
-      alert(
-        "Please Login or Sign-up to add this movie to the watch later list."
-      );
+      alert("Please Login or Sign-up to add this movie to your favorite list.");
       return;
     }
     let favoriteMovies = this.props.favoriteMovies;
@@ -56,7 +54,7 @@ class Result extends Component {
   watchlaterClickedHandler = (movieId) => {
     if (!this.props.loggedIn) {
       alert(
-        "Please Login or Sign-up to add this movie to the watch later list."
+        "Please Login or Sign-up to add this movie to your watch later list."
       );
       return;
     }
