@@ -11,7 +11,12 @@ class Result extends Component {
   state = {};
 
   favoriteClickedHandler = (movieId) => {
-    if (!this.props.loggedIn) return;
+    if (!this.props.loggedIn) {
+      alert(
+        "Please Login or Sign-up to add this movie to the watch later list."
+      );
+      return;
+    }
     let favoriteMovies = this.props.favoriteMovies;
     let favoriteMoviesIds = [];
     for (let key in favoriteMovies) {
@@ -53,7 +58,7 @@ class Result extends Component {
       alert(
         "Please Login or Sign-up to add this movie to the watch later list."
       );
-      return <Redirect push to="/login" />;
+      return;
     }
 
     let watchLaterMovies = this.props.watchLaterMovies;
