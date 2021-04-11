@@ -88,7 +88,8 @@ class Results extends Component {
     }
     if (
       this.props.location.search.replaceAll(" ", "") !==
-      prevProps.location.search.replaceAll(" ", "")
+        prevProps.location.search.replaceAll(" ", "") &&
+      this.props.location.search.replaceAll(" ", "") !== ""
     ) {
       this.setState({ loading: true, imageLoading: true });
       if (this.props.location.pathname === "/")

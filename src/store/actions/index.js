@@ -1,1 +1,1 @@
-export { loginAttempt } from "./authenticationActions";
+export { loginAttempt, logout, signupAttempt } from "./authenticationActions";

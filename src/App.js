@@ -4,12 +4,29 @@ import Layout from "./hoc/Layout/Layout";
 import SearchContainer from "./container/SearchContainer/SearchContainer";
 import Toolbar from "./components/Navigation/Toolbar/Toolbar";
 import Results from "./container/Results/Results";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { useState } from "react";
 import Sidebar from "./container/Sidebar/Sidebar";
 import Favorites from "./container/Favorites/Favorites";
-import Login from "./container/Login/Login";
+import Login from "./Login/Login";
+import { connect } from "react-redux";
+import Logout from "./Logout/Logout";
+import Signup from "./Signup/Signup";
+import Watchlater from "./container/Watchlater/Watchlater";
+import firebase from "firebase/app";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyBovpZ-7fYGF-3ew3XCMkVSz9vrTBKjH5w",
+  authDomain: "movie-senpai.firebaseapp.com",
+  databaseURL: "https://movie-senpai-default-rtdb.firebaseio.com",
+  projectId: "movie-senpai",
+  storageBucket: "movie-senpai.appspot.com",
+  messagingSenderId: "948348789552",
+  appId: "1:948348789552:web:7476474a081d0627255ef5",
+  measurementId: "G-QKWJ89T1GZ",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 function App(props) {
   const [showSidebar, setShowSidebar] = useState(false);
   const [targetTitle, setTargetTitle] = useState("");
@@ -32,21 +49,38 @@ function App(props) {
         ) : null}
         <Layout>
           <Toolbar />
-          <Route path="/" component={SearchContainer} />
-          <Route path="/login" component={Login} />
-          {/* <SearchContainer /> */}
-          <Route exact path="/favorites" component={Favorites} />
+
+          <Switch>
+            <Route path="/login" component={Login}>
+              {props.loggedIn ? <Redirect to="/search" /> : null}
+            </Route>
+            {/* <SearchContainer /> */}
+            <Route path="/favorites" component={Favorites} />
+            <Route path="/watchlater" component={Watchlater} />
+            <Route path="/logout" component={Logout} />
+            <Route path="/signup" component={Signup}>
+              {props.loggedIn ? <Redirect to="/search" /> : null}
+            </Route>
+            <Redirect exact from="/" to="/search" />
+          </Switch>
+
+          <Route path="/search" component={SearchContainer} />
           <Route
             path="/search"
             render={(routeProps) => (
               <Results clicked={resultClicked} {...routeProps} />
             )}
           />
-          {/* <Results clicked={logClicked} /> */}
         </Layout>
       </div>
     </BrowserRouter>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.authenticationReducer.userCredential !== null,
+  };
+};
+
+export default connect(mapStateToProps)(App);
