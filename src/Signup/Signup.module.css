@@ -10,6 +10,65 @@
   background-color: rgba(0, 0, 0, 0.637);
 }
 
+.ButtonFalse {
+  margin: 25px auto;
+  display: block;
+  /* margin: 2%; */
+  border-radius: 7px;
+  /* margin-right: 7%; */
+  max-width: 36%;
+  position: sticky;
+
+  font-size: 20px;
+  /* font-family: helvetica; */
+  text-decoration: none;
+  border: 2px solid rgb(138, 138, 138);
+  border-radius: 15px;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  background-color: rgba(0, 0, 0, 0.431);
+  padding: 4px 15px;
+  transition: all 0.5s;
+  cursor: not-allowed;
+  /* font-size: 100px; */
+  color: rgb(138, 138, 138);
+}
+
+.Button {
+  margin: 25px auto;
+  display: block;
+  /* margin: 2%; */
+  border-radius: 7px;
+  /* margin-right: 7%; */
+  max-width: 36%;
+  position: sticky;
+  color: white;
+  font-size: 20px;
+  /* font-family: helvetica; */
+  text-decoration: none;
+  border: 2px solid white;
+  border-radius: 15px;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  background-color: rgba(0, 0, 0, 0.431);
+  padding: 4px 15px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.Button:hover {
+  color: black;
+  background-color: rgba(255, 255, 255, 0.753);
+  transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  transform: scale(1.05);
+  transition: all 0.5s;
+  /* cursor: pointer; */
+}
+
 .Input {
   margin: 25px auto;
   display: block;
@@ -31,6 +90,30 @@
   padding: 4px 15px;
 
   transition: all 0.5s;
+}
+
+.InputFalse {
+  margin: 25px auto;
+  display: block;
+  /* margin: 2%; */
+  border-radius: 7px;
+  /* margin-right: 7%; */
+  max-width: 36%;
+  position: sticky;
+  color: white;
+  font-size: 20px;
+  /* font-family: helvetica; */
+  text-decoration: none;
+  border: 2px solid white;
+  border-radius: 15px;
+  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  background-color: rgba(0, 0, 0, 0.431);
+  padding: 4px 15px;
+
+  transition: all 0.5s;
+  background-color: rgba(253, 139, 139, 0.589);
 }
 
 .Input:hover {

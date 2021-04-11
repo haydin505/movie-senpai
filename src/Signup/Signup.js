@@ -22,7 +22,7 @@ class Signup extends Component {
         elementType: "input",
         elementConfig: {
           type: "email",
-          placeholder: "Your E-mail",
+          placeholder: "Your E-Mail",
         },
         value: "",
         validation: {
@@ -45,10 +45,12 @@ class Signup extends Component {
         touched: false,
       },
     },
+    formIsValid: false,
   };
 
   formSubmitHandler = (event) => {
     event.preventDefault();
+    // console.log("a");
     this.props.onSignup(
       this.state.signupForm.name.value,
       this.state.signupForm.email.value,
@@ -56,15 +58,40 @@ class Signup extends Component {
     );
   };
 
+  checkValidity = (value, rules) => {
+    let isValid = true;
+    if (rules.required) {
+      isValid = value.trim() !== "" && isValid;
+    }
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength && isValid;
+    }
+    if (rules.maxLength) {
+      isValid = value.length <= rules.maxLength && isValid;
+    }
+    return isValid;
+  };
   inputChangedHandler = (event, inputIdentifier) => {
     // console.log(event.target.type);
     let updatedForm = { ...this.state.signupForm };
     let updatedFormElement = { ...updatedForm[inputIdentifier] };
     updatedFormElement.value = event.target.value;
+    updatedFormElement.valid = this.checkValidity(
+      updatedFormElement.value,
+      updatedFormElement.validation
+    );
+    updatedFormElement.touched = true;
     updatedForm[inputIdentifier] = updatedFormElement;
+
+    let formIsValid = true;
+    for (let inputs in updatedForm) {
+      // console.log(updatedOrderForm[inputs].valid);
+
+      formIsValid = updatedForm[inputs].valid && formIsValid;
+    }
     // console.log(updatedFormElement);
     // console.log(updatedForm);
-    this.setState({ signupForm: updatedForm });
+    this.setState({ signupForm: updatedForm, formIsValid: formIsValid });
   };
 
   render() {
@@ -85,7 +112,12 @@ class Signup extends Component {
 
     let form = formElementsArray.map((formElement) => (
       <input
-        className={styles.Input}
+        className={
+          !this.state.signupForm[formElement.id].touched ||
+          this.state.signupForm[formElement.id].valid
+            ? `${styles.Input}`
+            : ` ${styles.InputFalse}`
+        }
         placeholder={formElement.config.elementConfig.placeholder}
         type={formElement.config.elementConfig.type}
         onChange={(event) => this.inputChangedHandler(event, formElement.id)}
@@ -99,7 +131,18 @@ class Signup extends Component {
         {/* <h1>Login</h1> */}
         <form className={styles.SignupForm} onSubmit={this.formSubmitHandler}>
           {form}
-          <input className={styles.Input} type="submit" value="Sign-up" />
+          <button
+            className={
+              this.state.formIsValid
+                ? `${styles.Button}`
+                : ` ${styles.ButtonFalse}`
+            }
+            type="button"
+            disabled={!this.state.formIsValid}
+            onClick={this.formSubmitHandler}
+          >
+            Sign-up
+          </button>
         </form>
       </div>
     );

@@ -29,6 +29,7 @@ function writeUserData(userId, name, email, imageUrl) {
 }
 
 export const loginSuccess = (userCredential, token) => {
+  // console.log(userCredential);
   return {
     type: actionsTypes.LOGIN_SUCCESS,
     userCredential: userCredential,
@@ -37,37 +38,138 @@ export const loginSuccess = (userCredential, token) => {
 };
 
 export const loginFail = (error) => {
-  console.log(error);
+  // console.log(error);
   return {
     type: actionsTypes.LOGIN_FAIL,
     error: error,
   };
 };
 
-export const loginAttempt = (email, password) => {
-  // console.log(email);
-  // console.log(password);
-  return (dispatch) => {
-    return firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // console.log(userCredential);
-        userCredential.user.getIdToken().then((res) => {
-          dispatch(loginSuccess(userCredential.user, res));
+// firebase
+//   .auth()
+//   .signInWithRedirect(firebase.auth().signInWithEmailAndPassword());
 
-          // console.log(res);
-        });
-      })
-      .catch((error) => {
-        console.log(error.message);
-        dispatch(loginFail(error.message));
+// firebase
+//   .auth()
+//   .getRedirectResult()
+//   .then((res) => console.log(res));
+export const persistLogin = () => {
+  return (dispatch) => {
+    return new Promise(function (resolve, reject) {
+      firebase.auth().onAuthStateChanged(function (userCredential) {
+        // console.log(userCredential);
+        if (userCredential) {
+          // console.log(userCredential !== null);
+          resolve(userCredential !== null);
+          dispatch(loginSuccess(userCredential, null));
+        } else {
+          // console.log(userCredential);
+          reject("noUserFound");
+        }
       });
+    });
   };
 };
 
+// firebase
+//   .auth()
+//   .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+//   .then(() => {
+//     // Existing and future Auth states are now persisted in the current
+//     // session only. Closing the window would clear any existing state even
+//     // if a user forgets to sign out.
+//     // ...
+//     // New sign-in will be persisted with session persistence.
+//     return firebase.auth().signInWithEmailAndPassword(email, password);
+//   })
+//   .catch((error) => {
+//     // Handle Errors here.
+//     var errorCode = error.code;
+//     var errorMessage = error.message;
+//   });
+
+export const loginAttempt = (email, password) => {
+  // console.log(email);
+  // console.log(password);
+
+  return (dispatch) => {
+    firebase
+      .auth()
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with session persistence.
+        return firebase
+          .auth()
+          .signInWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            // console.log(userCredential.user);
+            userCredential.user.getIdToken().then((res) => {
+              dispatch(loginSuccess(userCredential.user, res));
+
+              // console.log(res);
+            });
+          });
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        console.log(error.message);
+        dispatch(loginFail(error.message));
+      });
+
+    // return firebase
+    //   .auth()
+    //   .signInWithEmailAndPassword(email, password)
+    //   .then((userCredential) => {
+    //     console.log(userCredential.user);
+    //     userCredential.user.getIdToken().then((res) => {
+    //       dispatch(loginSuccess(userCredential.user, res));
+
+    //       // console.log(res);
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //     dispatch(loginFail(error.message));
+    //   });
+  };
+};
+
+// export const loginAttempt = (email, password) => {
+//   // console.log(email);
+//   // console.log(password);
+//   return (dispatch) => {
+//     return firebase
+//       .auth()
+//       .signInWithEmailAndPassword(email, password)
+//       .then((userCredential) => {
+//         console.log(userCredential.user);
+//         userCredential.user.getIdToken().then((res) => {
+//           dispatch(loginSuccess(userCredential.user, res));
+
+//           // console.log(res);
+//         });
+//       })
+//       .catch((error) => {
+//         console.log(error.message);
+//         dispatch(loginFail(error.message));
+//       });
+//   };
+// };
+
 export const logout = () => {
-  console.log("A");
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      // Sign-out successful.
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   return {
     type: actionsTypes.LOGOUT,
   };
@@ -94,7 +196,7 @@ export const signupAttempt = (name, email, password) => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+        // console.log(userCredential);
         userCredential.user.getIdToken().then((res) => {
           dispatch(signupSuccess(userCredential.user, res));
           writeUserData(

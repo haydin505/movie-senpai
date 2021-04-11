@@ -33,6 +33,7 @@ class Login extends Component {
         touched: false,
       },
     },
+    formIsValid: false,
   };
 
   componentDidMount() {
@@ -47,16 +48,41 @@ class Login extends Component {
     );
   };
 
+  checkValidity = (value, rules) => {
+    let isValid = true;
+    if (rules.required) {
+      isValid = value.trim() !== "" && isValid;
+    }
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength && isValid;
+    }
+    if (rules.maxLength) {
+      isValid = value.length <= rules.maxLength && isValid;
+    }
+    return isValid;
+  };
+
   inputChangedHandler = (event) => {
     // console.log(event.target.type);
     let inputIdentifier = event.target.type;
     let updatedForm = { ...this.state.loginForm };
     let updatedFormElement = { ...updatedForm[inputIdentifier] };
     updatedFormElement.value = event.target.value;
+    updatedFormElement.valid = this.checkValidity(
+      updatedFormElement.value,
+      updatedFormElement.validation
+    );
+    updatedFormElement.touched = true;
     updatedForm[inputIdentifier] = updatedFormElement;
+    let formIsValid = true;
+    for (let inputs in updatedForm) {
+      // console.log(updatedOrderForm[inputs].valid);
+
+      formIsValid = updatedForm[inputs].valid && formIsValid;
+    }
     // console.log(updatedFormElement);
     // console.log(updatedForm);
-    this.setState({ loginForm: updatedForm });
+    this.setState({ loginForm: updatedForm, formIsValid: formIsValid });
   };
 
   render() {
@@ -67,24 +93,47 @@ class Login extends Component {
         <p className={styles.ErrorMessage}>{this.props.errorMessage}</p>
       );
     }
+
+    const formElementsArray = [];
+    for (let key in this.state.loginForm)
+      formElementsArray.push({
+        id: key,
+        config: this.state.loginForm[key],
+      });
+
+    let form = formElementsArray.map((formElement) => (
+      <input
+        className={
+          !this.state.loginForm[formElement.id].touched ||
+          this.state.loginForm[formElement.id].valid
+            ? `${styles.Input}`
+            : ` ${styles.InputFalse}`
+        }
+        placeholder={formElement.config.elementConfig.placeholder}
+        type={formElement.config.elementConfig.type}
+        onChange={(event) => this.inputChangedHandler(event, formElement.id)}
+        key={formElement.id}
+      />
+    ));
+
     return (
       <div className={styles.Login}>
         {/* <h1>Login</h1> */}
         {errorMessage}
         <form className={styles.LoginForm} onSubmit={this.formSubmitHandler}>
-          <input
-            className={styles.Input}
-            onChange={this.inputChangedHandler}
-            type="email"
-            placeholder="Your e-mail"
-          />
-          <input
-            className={styles.Input}
-            onChange={this.inputChangedHandler}
-            type="password"
-            placeholder="Password"
-          />
-          <input className={styles.Input} type="submit" value="Sign-in" />
+          {form}
+          <button
+            className={
+              this.state.formIsValid
+                ? `${styles.Button}`
+                : ` ${styles.ButtonFalse}`
+            }
+            type="button"
+            disabled={!this.state.formIsValid}
+            onClick={this.formSubmitHandler}
+          >
+            Login
+          </button>
         </form>
       </div>
     );

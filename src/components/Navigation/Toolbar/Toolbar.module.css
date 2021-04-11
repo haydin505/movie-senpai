@@ -29,6 +29,7 @@
   color: rgb(255, 255, 255);
   display: block;
   transition: all 0.5s;
+  margin-bottom: 3%;
 }
 .ToolbarSection h1:hover {
   font-family: "MyWebFont2";

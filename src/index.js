@@ -6,9 +6,13 @@ import reportWebVitals from "./reportWebVitals";
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import authenticationReducer from "./store/reducers/authenticationReducer";
+import userDataReducer from "./store/reducers/userDataReducer";
 import thunk from "redux-thunk";
 
-const reducers = { authenticationReducer: authenticationReducer };
+const reducers = {
+  authenticationReducer: authenticationReducer,
+  userDataReducer: userDataReducer,
+};
 const rootReducer = combineReducers(reducers);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
