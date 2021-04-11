@@ -6,7 +6,7 @@ import { BsStopwatchFill, BsStopwatch } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
-import { Redirect } from "react-router";
+
 class Result extends Component {
   state = {};
 
