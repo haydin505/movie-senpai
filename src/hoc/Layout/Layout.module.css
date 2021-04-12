@@ -28,6 +28,7 @@
   background-position: center;
   display: block;
   transition: all 3s;
+  /* padding: env(safe-area-inset); */
 }
 
 @media only screen and (max-width: 768px) {
@@ -39,5 +40,6 @@
     width: 100%;
     height: 100vh;
     transition: all 2s;
+    /* padding: env(safe-area-inset); */
   }
 }
