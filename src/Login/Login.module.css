@@ -133,3 +133,24 @@
   transition: all 0.5s;
   /* cursor: pointer; */
 }
+
+@media only screen and (max-width: 500px) {
+  .Login input {
+    /* width: 150px; */
+    /* background-image: url("../../assets//images/background-image-1.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; */
+    /* position: relative; */
+    font-size: 17px;
+  }
+  .Login button {
+    /* width: 150px; */
+    /* background-image: url("../../assets//images/background-image-1.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; */
+    /* position: relative; */
+    font-size: 17px;
+  }
+}

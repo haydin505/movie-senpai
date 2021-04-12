@@ -62,7 +62,7 @@
   height: 100%;
   display: inline-block;
   margin: 15px;
-  padding: 1.8%;
+  padding: 1.3%;
   /*  Active */
   box-sizing: border-box;
   align-items: center;
@@ -86,7 +86,7 @@
 }
 
 .NavigationItemActive {
-  /* padding: 1%; */
+  /* padding: 4%; */
   /*  Active */
   /* box-sizing: border-box; */
   border-bottom: 2px solid rgb(255, 255, 255);
@@ -99,7 +99,7 @@
   src: url("../../../assets/fonts/Chicago3D.ttf") format("truetype");
 }
 
-@media only screen and (max-width: 465px) {
+@media only screen and (max-width: 700px) {
   .Toolbar {
     margin-top: 0;
 
@@ -124,10 +124,60 @@
 
   .ToolbarSection h1 {
     font-family: "MyWebFont2";
-    margin: 4%;
+    margin: 10% 4% 4% 4%;
     font-weight: 100;
     font-size: 400%;
     color: rgb(255, 255, 255);
     display: block;
+  }
+
+  .NavigationItems {
+    /* padding: 0; */
+    margin: 0;
+    width: 100%;
+    display: inline-block;
+    box-sizing: border-box;
+    list-style: none;
+    align-items: center;
+    vertical-align: middle;
+    font-size: 14px;
+  }
+
+  .NavigationItem {
+    background-color: rgba(8, 8, 8, 0.37);
+
+    border-radius: 20px;
+    border: 2px solid rgb(255, 255, 255);
+    text-decoration: none;
+    display: inline-block;
+    margin: 15px;
+    padding: 3.3%;
+    /*  Active */
+    box-sizing: border-box;
+    align-items: center;
+    vertical-align: middle;
+  }
+
+  .NavigationItem:hover {
+    border: 2px solid #fff;
+    border-radius: 20px;
+    transform: scale(1.05);
+    transition: transform 0.5s;
+  }
+
+  .NavigationItem a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .NavigationItem a:hover {
+    /* border-bottom: 1px solid #fff; */
+  }
+
+  .NavigationItemActive {
+    /* padding: 4%; */
+    /*  Active */
+    /* box-sizing: border-box; */
+    border-bottom: 2px solid rgb(255, 255, 255);
   }
 }

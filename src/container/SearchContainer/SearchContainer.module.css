@@ -24,7 +24,7 @@
 
 .Input {
   margin: 2%;
-  border-radius: 7px;
+  /* border-radius: 7px; */
   /* margin-right: 7%; */
   max-width: 36%;
   position: sticky;
@@ -83,10 +83,10 @@ input[type="submit"]:hover {
   -moz-transition-duration: 0.5s;
 } */
 
-@media only screen and (max-width: 465px) {
+@media only screen and (max-width: 795px) {
   .SearchBox {
     margin: 10px auto;
-    width: 100%;
+    width: 95%;
     text-align: center;
     box-shadow: 0 3px 20px #ccc;
     border: 1px solid #eee;
@@ -95,13 +95,14 @@ input[type="submit"]:hover {
     background-color: rgba(0, 0, 0, 0.527);
     /* display: inline-block; */
   }
+
   .Input {
     color: white;
     font-size: 10px;
     /* font-family: helvetica; */
     text-decoration: none;
-    border: 2px solid white;
-    border-radius: 15px;
+    /* border: 2px solid white; */
+    border-radius: 10px;
     transition-duration: 0.2s;
     -webkit-transition-duration: 0.2s;
     -moz-transition-duration: 0.2s;
@@ -115,5 +116,9 @@ input[type="submit"]:hover {
     transition-duration: 0.5s;
     -webkit-transition-duration: 0.5s;
     -moz-transition-duration: 0.5s;
+  }
+
+  .SearchBox select {
+    border-radius: 7px;
   }
 }
