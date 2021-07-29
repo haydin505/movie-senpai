@@ -109,6 +109,7 @@ class Results extends Component {
       "&primary_release_year=" +
       year;
     this.props.fetchMovies(finalUrl);
+
     // Before Redux
     // fetch(finalUrl)
     //   .then((result) => {
